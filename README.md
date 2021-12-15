@@ -1,13 +1,13 @@
-# minicart-edit
+# 47street_components
 
 > Made with create-react-library
 
-[![NPM](https://img.shields.io/npm/v/minicart-edit.svg)](https://www.npmjs.com/package/minicart-edit) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/47street_components.svg)](https://www.npmjs.com/package/47street_components) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-yarn add minicart-edit
+yarn add 47street_components
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ yarn add minicart-edit
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from 'minicart-edit'
+import MyComponent from '47street_components'
 
 class Example extends Component {
   render() {

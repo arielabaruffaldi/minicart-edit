@@ -1,8 +1,8 @@
 {
-  "vendor": "CHANGE_ME",
+  "vendor": "street47",
   "name": "minicart-edit",
   "version": "0.0.1",
-  "title": "CHANGE_ME",
+  "title": "minicart-edit",
   "description": "Made with create-react-library",
   "vtexComponentsEnabled": true,
   "defaultLocale": "pt-BR",
@@ -12,7 +12,12 @@
   },
   "dependencies": {
     "vtex.styleguide": "9.x",
-    "vtex.css-handles": "0.x"
+    "vtex.css-handles": "0.x",
+    "vtex.checkout-graphql": "0.x",
+    "vtex.search-graphql": "0.x",
+    "vtex.product-list": "0.x",
+    "vtex.order-manager": "0.x",
+    "vtex.checkout-resources": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

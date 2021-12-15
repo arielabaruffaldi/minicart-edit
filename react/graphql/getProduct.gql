@@ -1,0 +1,35 @@
+
+    query getProduct($productId: [ID!]){
+        productsByIdentifier(field:id, values:$productId) @context(provider: "vtex.search-graphql") {
+            link
+            productId
+            productName
+            skuSpecifications {
+                field {
+                    originalName
+                    name
+                }
+                values{
+                    name
+                    originalName
+                }
+            }
+            productReference
+            titleTag
+            metaTagDescription
+            jsonSpecifications
+            releaseDate
+            items {
+                itemId
+                name
+                nameComplete
+                complementName
+                ean
+                variations {
+                    originalName
+                    name
+                    values
+                }
+            }
+        }
+    }
