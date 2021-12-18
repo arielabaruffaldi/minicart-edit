@@ -10,6 +10,7 @@ import { useLazyQuery, useMutation } from 'react-apollo';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import { ModalContext } from '../../store/context/ModalContext';
 import SizePicker from '../SizePicker/SizePicker';
+import Slider from '../Slider/Slider';
 
 
 const MinicartEdit = () => {
@@ -81,9 +82,6 @@ const MinicartEdit = () => {
     useEffect(() => {
         if (item) {
             dispatch({ type: 'SET_ACTIVE_SKU', payload: item })
-            const images = Object.values(item.imageUrls)
-
-            dispatch({ type: "SET_IMAGES", payload: images })
 
             getProductQuery({
                 variables: {
@@ -97,11 +95,9 @@ const MinicartEdit = () => {
 
     useEffect(() => {
         if (productData) {
-            console.log("productData", productData)
-            console.log("active item.id", item.id)
             dispatch({ type: 'SET_PRODUCT', payload: productData.productsByIdentifier[0] })
-            
-            const product = productData.productsByIdentifier[0].items.find((product: any)=>product.itemId === item.id)
+
+            const product = productData.productsByIdentifier[0].items.find((product: any) => product.itemId === item.id)
 
             const images = product.images.reduce((accumulated: any, current: any) => [
                 ...accumulated,
@@ -147,13 +143,8 @@ const MinicartEdit = () => {
             {
                 state.activeSku &&
                 <>
-                    {
-                        state.images &&
-                        state.images.map((image: any, index: number) => {
-                            if (index === state.activeSku?.imageUrls.length - 1) return
-                            return <img key={index} src={image} alt={image} />
-                        })
-                    }
+                    <Slider />
+
                     {
                         //TODO: usar el list-price de vtex-apps
                         <h3>{state.activeSku.price}</h3>
