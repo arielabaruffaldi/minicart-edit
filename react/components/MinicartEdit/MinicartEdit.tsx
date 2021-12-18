@@ -12,6 +12,8 @@ import { ModalContext } from '../../store/context/ModalContext';
 import SizePicker from '../SizePicker/SizePicker';
 import Slider from '../Slider/Slider';
 
+import { ProductPrice } from 'vtex.store-components'
+
 
 const MinicartEdit = () => {
     const { item } = useItemContext()
@@ -136,19 +138,23 @@ const MinicartEdit = () => {
         }
     }, [state.selectedColor])
 
+    console.log("state", state)
 
     return (
         <>
-            <h3>Editar</h3>
             {
                 state.activeSku &&
                 <>
                     <Slider />
-
-                    {
-                        //TODO: usar el list-price de vtex-apps
-                        <h3>{state.activeSku.price}</h3>
-                    }
+                    {/* //TODO: usar el list-price de vtex-apps */}
+                    <ProductPrice
+                        showListPrice={true}
+                        showLabels={false}
+                        showListPriceRange={true}
+                    />
+                    {/*  <h3>{state.activeSku.price}</h3> */}
+                    <h4>{state.product.productName}</h4>
+                    <h5>Color</h5>
                     <ColorPicker colors={state.colors} />
                     <SizePicker availableSkusPerColor={state.availableSkusPerColor} />
                     <button onClick={() => handleChangeSku()} />
