@@ -4,6 +4,7 @@ import { ModalReducer } from './../reducers/ModalReducer';
 const initialState = {
     product: {},
     activeSku: {},
+    images: [],
     colors: [],
     selectedColor: '',
     availableSkusPerColor: [],

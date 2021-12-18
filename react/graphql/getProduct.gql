@@ -25,6 +25,9 @@
                 nameComplete
                 complementName
                 ean
+                images{
+                    imageUrl
+                }
                 variations {
                     originalName
                     name

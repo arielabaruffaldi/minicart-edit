@@ -5,6 +5,11 @@ export const ModalReducer = (state: ModalContext, action: any) => {
         ...state,
         product: action.payload
       }
+    case 'SET_IMAGES':
+      return {
+        ...state,
+        images: action.payload
+      }
     case 'SET_ACTIVE_SKU':
       return {
         ...state,

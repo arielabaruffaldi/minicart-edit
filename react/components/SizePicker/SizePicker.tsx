@@ -18,8 +18,7 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
             }),
         ];
     }, []);
-    console.log("flattenSizes", flattenSizes)
-    console.log("availableSkusPerColor", availableSkusPerColor)
+
     return (
         <>
             {flattenSizes.map((item: any, index: any) =>
