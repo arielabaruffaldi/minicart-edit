@@ -59,7 +59,6 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
         }
 
         if (state.selectedSize.itemId === state.activeSku.id) {
-            console.log("ENTRO ACA PERON")
             //TODO: ver por qué no actualiza el quantity en el orderForm
             const updateItem = await updateItems({
                 variables: {
@@ -72,13 +71,12 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
                 }
             })
             setOrderForm(updateItem.data.updateItems)
-            console.log("updateItem", updateItem)
             return
         }
 
         console.log("state.quantity", state.quantity)
 
-        const addToCartRes = await addToCart({
+        await addToCart({
             variables: {
                 items: [
                     {
@@ -91,10 +89,6 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
                 ]
             },
         })
-
-        console.log("addToCartRes", addToCartRes)
-
-        
 
         //item to delete
         const deleteItem = await updateItems({
