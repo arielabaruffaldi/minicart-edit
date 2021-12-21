@@ -3,6 +3,7 @@ import { ModalReducer } from './../reducers/ModalReducer';
 
 const initialState = {
     product: {},
+    quantity: 1,
     activeSku: {},
     images: [],
     colors: [],

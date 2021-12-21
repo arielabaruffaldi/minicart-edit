@@ -1,13 +1,19 @@
 import React, { useContext } from 'react'
 import { ModalContext } from '../../store/context/ModalContext';
+import { useCssHandles, applyModifiers } from 'vtex.css-handles'
+import { GeneralContext } from '../../store/context/GeneralContext';
 
 interface SizePickerProps {
     availableSkusPerColor: any[]
 }
 
+const CSS_HANDLES = ['sizePicker', 'sizePicker--title', 'size', 'size--selected']
+
 
 const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPerColor }) => {
     const { state, dispatch } = useContext(ModalContext)
+    const { dispatch: generalDispatch } = useContext(GeneralContext)
+    const handles = useCssHandles(CSS_HANDLES)
 
     const flattenSizes = availableSkusPerColor.reduce((accumulated, current): any => {
         return [
@@ -19,17 +25,27 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
         ];
     }, []);
 
+    const handleSizeChange = (item: any) => {
+        console.log("ENTRO ACA")
+        dispatch({ type: "SET_SELECTED_SIZE", payload: item })
+        generalDispatch({ type: "SET_ERROR", payload: { error: false, message: "" } })
+    }
+
+
     return (
         <>
-            {flattenSizes.map((item: any, index: any) =>
-                <span
-                    key={index}
-                    className={index + 1 === state.selectedSize ? 'selected' : ''}
-                    onClick={() => dispatch({ type: "SET_SELECTED_SIZE", payload: item })}
-                >
-                    {item.size}
-                </span>
-            )}
+            <h5 className={handles['sizePicker--title']}>Talle</h5>
+            <div className={handles.sizePicker}>
+                {flattenSizes.map((item: any, index: any) =>
+                    <span
+                        key={index}
+                        className={`${state.selectedSize.size == item.size ? handles['size--selected'] : ''} ${applyModifiers(handles.size, item.size.toLowerCase())}`}
+                        onClick={() => handleSizeChange(item)}
+                    >
+                        {item.size}
+                    </span>
+                )}
+            </div>
         </>
     )
 }

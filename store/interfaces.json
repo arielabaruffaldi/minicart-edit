@@ -1,5 +1,8 @@
 {
   "minicart-edit": {
     "component": "App"
+  },
+  "minicart-quantity": {
+    "component": "MinicartQuantity"
   }
 }
