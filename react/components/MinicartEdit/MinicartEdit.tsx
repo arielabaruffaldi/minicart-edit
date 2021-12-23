@@ -91,13 +91,7 @@ const MinicartEdit = () => {
             {
                 state.activeSku &&
                 <>
-                    <Slider>
-                        {state.images.map((image: any, index: number) => {
-                            return (
-                                <img key={index} src={image} alt={image} />
-                            )
-                        })}
-                    </Slider>
+                    <Slider />
                     <div className={handles.container}>
                         <ProductPrice sellingPriceClass="c-on-base t-heading-6" sellingPrice={state.activeSku?.sellingPrice / 100} showListPrice={false} showLabels={false} />
                         <ProductName name={state.product.productName} />
