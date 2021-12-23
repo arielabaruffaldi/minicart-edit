@@ -46,5 +46,8 @@
   "files": [
     "dist",
     "src"
-  ]
+  ],
+  "dependencies": {
+    "swiper": "^7.3.4"
+  }
 }

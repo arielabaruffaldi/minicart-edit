@@ -26,13 +26,6 @@ const Slider = () => {
                 )
             })}
         </SliderLayout>
-        /*  {
-             state.images &&
-             state.images.map((image: any, index: number) => {
-                 if (index === state.activeSku?.imageUrls.length - 1) return
-                 return <img key={index} src={image} alt={image} />
-             })
-         } */
     )
 }
 
