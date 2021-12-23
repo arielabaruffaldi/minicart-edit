@@ -21,5 +21,8 @@
   "files": [
     "dist",
     "src"
-  ]
+  ],
+  "dependencies": {
+    "swiper": "6.2.0"
+  }
 }
