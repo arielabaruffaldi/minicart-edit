@@ -89,7 +89,6 @@ const MinicartEdit = () => {
                 ...accumulated,
                 accumulated = current.imageUrl
             ], [])
-            console.log("LKLEGO ACA")
             images.length && dispatch({ type: "SET_IMAGES", payload: images })
             dispatch({ type: "SET_AVAILABLES_SKUS_PER_COLOR", payload: availableSizesPerColor })
             generalDispatch({ type: 'SET_LOADING', payload: false })
