@@ -105,18 +105,21 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
 
         if (deleteItem.data) {
             setOrderForm(deleteItem.data.updateItems)
-            generalDispatch({ type: 'SET_LOADING', payload: false })
+            // generalDispatch({ type: 'SET_LOADING', payload: false })
         }
     }
 
+    const isValid = () => {
+        return !state.selectedSize.itemId || state.selectedSize.itemId === state.activeSku.id && state.activeSku.quantity === state.quantity
+    }
 
     return (
         <>
             <button
-                className={`heading-6 ${handles.Button} ${!state.selectedSize.itemId ? handles['Button--disabled']: ''}`}
+                className={`heading-6 ${handles.Button} ${isValid () ? handles['Button--disabled']: ''}`}
                 onClick={handleChangeSku}
                 {...props}
-                disabled={!state.selectedSize.itemId}
+                disabled={isValid()}
             >
                 guardar
             </button>

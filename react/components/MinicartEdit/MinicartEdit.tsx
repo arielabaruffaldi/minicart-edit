@@ -29,10 +29,6 @@ const MinicartEdit = () => {
     )
 
     useEffect(() => {
-        generalDispatch({ type: 'SET_LOADING', payload: true })
-    }, [])
-
-    useEffect(() => {
         if (item) {
             dispatch({ type: 'SET_ACTIVE_SKU', payload: item })
             dispatch({ type: 'SET_QUANTITY', payload: item.quantity })
