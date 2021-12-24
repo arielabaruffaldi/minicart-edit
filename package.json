@@ -46,5 +46,8 @@
   "files": [
     "dist",
     "src"
-  ]
+  ],
+  "dependencies": {
+    "swiper": "6.0.2"
+  }
 }

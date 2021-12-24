@@ -8,7 +8,7 @@ import { useMutation } from 'react-apollo';
 import { ModalContext } from '../../store/context/ModalContext';
 import { GeneralContext } from '../../store/context/GeneralContext';
 
-const CSS_HANDLES = ['Button']
+const CSS_HANDLES = ['Button', 'Button--disabled']
 
 interface ButtonProps {
 }
@@ -18,7 +18,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
     const handles = useCssHandles(CSS_HANDLES)
 
     const { state } = useContext(ModalContext)
-    const { state: generalState, dispatch: generalDispatch } = useContext(GeneralContext)
+    const { dispatch: generalDispatch } = useContext(GeneralContext)
 
     const [
         addToCart,
@@ -32,18 +32,21 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
 
 
     useEffect(() => {
-        if (addToCartError) generalDispatch({ type: "SET_ERROR", payload: { error: true, message: 'Ocurrió un error, inténtelo nuevamente' } })
+        if (addToCartError) {
+            generalDispatch({ type: 'SET_LOADING', payload: false })
+            generalDispatch({ type: "SET_ERROR", payload: { error: true, message: 'Ocurrió un error, inténtelo nuevamente' } })
+        }
         if (addToCartLoading) generalDispatch({ type: "SET_LOADING", payload: true })
-
     }, [addToCartError, addToCartLoading])
 
 
     useEffect(() => {
-        if (updateItemsError) console.log("updateItemsError", updateItemsError)
-        if (updateItemsLoading) console.log("updateItemsLoading", updateItemsLoading)
+        if (updateItemsError) generalDispatch({ type: "SET_ERROR", payload: { error: true, message: 'Ocurrió un error, inténtelo nuevamente' } })
+        if (updateItemsLoading) generalDispatch({ type: 'SET_LOADING', payload: true })
     }, [updateItemsError, updateItemsLoading])
 
     const handleChangeSku = async () => {
+        generalDispatch({ type: "SET_LOADING", payload: true })
         const itemToDelete = orderForm.items.find((orderItem: any) => {
             return orderItem.id === state.activeSku.id
         })
@@ -74,8 +77,6 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
             return
         }
 
-        console.log("state.quantity", state.quantity)
-
         await addToCart({
             variables: {
                 items: [
@@ -102,19 +103,20 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
             }
         })
 
-        deleteItem.data && setOrderForm(deleteItem.data.updateItems)
+        if (deleteItem.data) {
+            setOrderForm(deleteItem.data.updateItems)
+            generalDispatch({ type: 'SET_LOADING', payload: false })
+        }
     }
 
 
     return (
         <>
-            {generalState.error.error &&
-                <p>{generalState.error.message}</p>
-            }
             <button
-                className={`heading-6 ${handles.Button}`}
+                className={`heading-6 ${handles.Button} ${!state.selectedSize.itemId ? handles['Button--disabled']: ''}`}
                 onClick={handleChangeSku}
                 {...props}
+                disabled={!state.selectedSize.itemId}
             >
                 guardar
             </button>

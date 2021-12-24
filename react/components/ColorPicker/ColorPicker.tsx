@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { ModalContext } from '../../store/context/ModalContext'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
+import { GeneralContext } from '../../store/context/GeneralContext'
 
 interface ColorPickerProps {
     colors: Color[]
@@ -15,6 +16,7 @@ const CSS_HANDLES = ['colorPicker', 'colorPicker--title', 'color', 'color--selec
 const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({ colors }) => {
     const { state, dispatch } = useContext(ModalContext)
     const handles = useCssHandles(CSS_HANDLES)
+    const { state: generalState } = useContext(GeneralContext)
 
     useEffect(() => {
         if (state.activeSku.skuSpecifications) {
@@ -26,9 +28,13 @@ const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({ colors }) => {
     }, [state.activeSku])
 
     const onColorChange = (item: any) => {
+        console.log("entro a onColorchange")
         dispatch({ type: "SET_SELECTED_COLOR", payload: item.name })
         dispatch({ type: "SET_SELECTED_SIZE", payload: {} })
     }
+
+    console.log("generalState",generalState)
+    console.log("state",state)
 
     return (
         <>

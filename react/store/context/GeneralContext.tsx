@@ -6,7 +6,7 @@ const initialState = {
         status: false,
         message: ""
     },
-    loading: true,
+    loading: false,
 }
 
 export const GeneralContext = React.createContext<{

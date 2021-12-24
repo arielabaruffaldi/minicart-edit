@@ -1,34 +1,43 @@
 import React, { useContext } from 'react';
-// import { SliderLayout } from 'vtex.slider-layout'
-// import { ModalContext } from '../../store/context/ModalContext';
-// import { Slider } from 'vtex.store-components'
+import SwiperCore, { Thumbs, Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import SwiperCore, { Thumbs, Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { useCssHandles } from 'vtex.css-handles'
+
 import { ModalContext } from '../../store/context/ModalContext';
+import './swiper.global.css';
+import './styles.global.css';
 
-SwiperCore.use([Thumbs, Navigation, Pagination])
+SwiperCore.use([Thumbs, Navigation])
+
+const CSS_HANDLES = ['Slider--container']
 
 
 const Slider: any = () => {
     const { state } = useContext(ModalContext)
+    const handles = useCssHandles(CSS_HANDLES)
 
     return (
         <Swiper
-            spaceBetween={50}
-            slidesPerView={3}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            spaceBetween={10}
+            className={handles['Slider--container']}
+            slidesPerView="auto"
+            breakpoints={{
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                    navigation: false
+                }
+            }}
         >
-            {state.images.map((image: any, index: number) =>
-                <SwiperSlide
-                    key={`slider-${index}`}
-                >
-                    <img src={image} alt={image} />
-                </SwiperSlide>
+            {state.images.map((image: any, index: number) => {
+                return (
+                    <SwiperSlide>
+                        <img key={index} src={image} alt={image} />
+                    </SwiperSlide>
 
-            )}
-
+                )
+            })}
         </Swiper>
 
 
