@@ -50,17 +50,6 @@ const Button: React.FunctionComponent<ButtonProps> = ({ ...props }) => {
         const itemToDelete = orderForm.items.find((orderItem: any) => {
             return orderItem.id === state.activeSku.id
         })
-
-        if (state.selectedSize.itemId === state.activeSku.id && state.activeSku.quantity === state.quantity) {
-            generalDispatch({
-                type: "SET_ERROR", payload: {
-                    error: true,
-                    message: "Ya tenes este ítem en el carrito"
-                }
-            })
-            return
-        }
-
         if (state.selectedSize.itemId === state.activeSku.id) {
             //TODO: ver por qué no actualiza el quantity en el orderForm
             const updateItem = await updateItems({

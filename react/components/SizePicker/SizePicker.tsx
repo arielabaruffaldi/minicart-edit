@@ -30,7 +30,6 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
         generalDispatch({ type: "SET_ERROR", payload: { error: false, message: "" } })
     }
 
-
     return (
         <>
             <h5 className={handles['sizePicker--title']}>Talle</h5>
