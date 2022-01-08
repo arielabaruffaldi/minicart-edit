@@ -18,7 +18,7 @@ const Slider: any = ({ children, spaceBetween = 0, className }: PropsWithChildre
         <Swiper
             spaceBetween={spaceBetween}
             className={`${handles['Slider--container']} ${className || ''}`}
-            slidesPerView={3}
+            slidesPerView={2}
             breakpoints={{
                 768: {
                     slidesPerView: 2,
