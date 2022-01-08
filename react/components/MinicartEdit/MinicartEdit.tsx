@@ -16,7 +16,7 @@ import Button from '../Button/Button';
 import { useCssHandles } from 'vtex.css-handles'
 import ProductQuantity from '../ProductQuantity/ProductQuantity';
 
-const CSS_HANDLES = ['container']
+const CSS_HANDLES = ['container', 'slider--image', 'slider--product']
 
 const MinicartEdit = () => {
     const { item } = useItemContext()
@@ -98,7 +98,13 @@ const MinicartEdit = () => {
             {
                 state.activeSku &&
                 <>
-                    <Slider />
+                    <Slider className={handles['slider--product']} spaceBetween={10}>
+                        {state.images.map((image: any, index: number) => {
+                            return (
+                                <img className={handles['slider--image']} key={index} src={image} alt={image} />
+                            )
+                        })}
+                    </Slider>
                     <div className={handles.container}>
                         <ProductPrice sellingPriceClass="c-on-base t-heading-6" sellingPrice={state.activeSku?.sellingPrice / 100} showListPrice={false} showLabels={false} />
                         <ProductName name={state.product.productName} />
