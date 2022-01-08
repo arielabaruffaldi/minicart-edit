@@ -16,11 +16,12 @@ import Button from '../Button/Button';
 import { useCssHandles } from 'vtex.css-handles'
 import ProductQuantity from '../ProductQuantity/ProductQuantity';
 
-const CSS_HANDLES = ['container']
+const CSS_HANDLES = ['container', 'slider--image', 'slider--product']
 
 const MinicartEdit = () => {
     const { item } = useItemContext()
     const { state, dispatch } = useContext(ModalContext)
+    const { dispatch: generalDispatch } = useContext(ModalContext)
     const handles = useCssHandles(CSS_HANDLES)
 
     const [getProductQuery, { data: productData, loading: productLoading, error: productError }] = useLazyQuery(
@@ -31,7 +32,6 @@ const MinicartEdit = () => {
         if (item) {
             dispatch({ type: 'SET_ACTIVE_SKU', payload: item })
             dispatch({ type: 'SET_QUANTITY', payload: item.quantity })
-            console.log("item----", item)
             getProductQuery({
                 variables: {
                     productId: Number(item.productId)
@@ -42,8 +42,8 @@ const MinicartEdit = () => {
 
     useEffect(() => {
         if (productData) {
-            console.log("productData", productData)
             dispatch({ type: 'SET_PRODUCT', payload: productData.productsByIdentifier[0] })
+            generalDispatch({ type: 'SET_LOADING', payload: false })
 
             const product = productData.productsByIdentifier[0].items.find((product: any) => product.itemId === item.id)
 
@@ -54,8 +54,16 @@ const MinicartEdit = () => {
             dispatch({ type: 'SET_IMAGES', payload: images })
 
         }
-        if (productLoading) console.log("loading", productLoading)
-        if (productError) console.log("productError", productError)
+        if (productLoading) generalDispatch({ type: 'SET_LOADING', payload: true })
+        if (productError) {
+            generalDispatch({ type: 'SET_LOADING', payload: false })
+            generalDispatch({
+                type: 'SET_ERROR', payload: {
+                    error: true,
+                    message: 'ocurrió un error, inténtelo nuevamente'
+                }
+            })
+        }
     }, [productData, productLoading, productError])
 
     useEffect(() => {
@@ -77,21 +85,26 @@ const MinicartEdit = () => {
                 ...accumulated,
                 accumulated = current.imageUrl
             ], [])
-
             images.length && dispatch({ type: "SET_IMAGES", payload: images })
-
             dispatch({ type: "SET_AVAILABLES_SKUS_PER_COLOR", payload: availableSizesPerColor })
+            generalDispatch({ type: 'SET_LOADING', payload: false })
+
         }
     }, [state.selectedColor, state.product])
 
-    console.log("state", state)
 
     return (
         <>
             {
                 state.activeSku &&
                 <>
-                    <Slider />
+                    <Slider className={handles['slider--product']} spaceBetween={10}>
+                        {state.images.map((image: any, index: number) => {
+                            return (
+                                <img className={handles['slider--image']} key={index} src={image} alt={image} />
+                            )
+                        })}
+                    </Slider>
                     <div className={handles.container}>
                         <ProductPrice sellingPriceClass="c-on-base t-heading-6" sellingPrice={state.activeSku?.sellingPrice / 100} showListPrice={false} showLabels={false} />
                         <ProductName name={state.product.productName} />

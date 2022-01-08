@@ -26,11 +26,9 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
     }, []);
 
     const handleSizeChange = (item: any) => {
-        console.log("ENTRO ACA")
         dispatch({ type: "SET_SELECTED_SIZE", payload: item })
         generalDispatch({ type: "SET_ERROR", payload: { error: false, message: "" } })
     }
-
 
     return (
         <>

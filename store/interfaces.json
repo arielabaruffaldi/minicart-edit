@@ -4,5 +4,9 @@
   },
   "minicart-quantity": {
     "component": "MinicartQuantity"
+  },
+  "slider-draggable": {
+    "component": "Slider",
+    "composition": "children"
   }
 }
