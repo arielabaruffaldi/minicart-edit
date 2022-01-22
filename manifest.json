@@ -1,7 +1,7 @@
 {
   "vendor": "street47",
   "name": "minicart-edit",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "title": "minicart-edit",
   "description": "Made with create-react-library",
   "vtexComponentsEnabled": true,
