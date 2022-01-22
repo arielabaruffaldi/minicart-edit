@@ -22,7 +22,7 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
                 itemId: current.itemId,
                 size: current.variations.find((item: any) => item.name === 'Talle').values[0],
             }),
-        ];
+        ].sort((a, b) => a.size - b.size)
     }, []);
 
     const handleSizeChange = (item: any) => {
