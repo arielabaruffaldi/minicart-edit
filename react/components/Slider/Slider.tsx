@@ -26,6 +26,8 @@ const Slider: any = ({ children, spaceBetween = 0, className }: PropsWithChildre
                     navigation: false
                 }
             }}
+            scrollbar={{ draggable: true }}
+
         >
             {children.map((item: any, index: number) => <SwiperSlide className={handles['Slider--item']} key={index}>{item}</SwiperSlide>)}
         </Swiper>

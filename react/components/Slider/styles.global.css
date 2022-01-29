@@ -1,5 +1,43 @@
-.swiper-slide{
-    /* width: 38% !important; */
-    cursor: grab;
-    margin-right: 20px;
+.swiper-slide {
+  /* width: 38% !important; */
+  cursor: grab;
+  margin-right: 20px;
+}
+
+.size-picker-swiper .swiper-button-prev {
+  display: none;
+}
+
+.size-picker-swiper .swiper-wrapper {
+  /* width: 90%;
+  overflow: hidden; */
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-container {
+    width: 100%;
+  }
+}
+
+.size-picker-swiper .swiper-button-next {
+  transform: scale(0.34);
+  right: -10px;
+}
+
+.swiper-container{
+    width: 100%;
+}
+
+.size-picker-swiper .swiper-button-next.hide,
+.swiper-scrollbar {
+  display: none;
+}
+
+.size-picker-swiper .swiper-container {
+  margin: 0;
+  width: 100%;
+}
+
+.swiper-button-next:after {
+  color: black;
 }
