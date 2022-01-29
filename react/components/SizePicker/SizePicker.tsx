@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { ModalContext } from '../../store/context/ModalContext';
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
 import { GeneralContext } from '../../store/context/GeneralContext';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 interface SizePickerProps {
     availableSkusPerColor: any[]
@@ -9,8 +10,8 @@ interface SizePickerProps {
 
 const CSS_HANDLES = ['sizePicker', 'sizePicker--title', 'size', 'size--selected']
 
-
 const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPerColor }) => {
+
     const { state, dispatch } = useContext(ModalContext)
     const { dispatch: generalDispatch } = useContext(GeneralContext)
     const handles = useCssHandles(CSS_HANDLES)
@@ -34,15 +35,31 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
         <>
             <h5 className={handles['sizePicker--title']}>Talle</h5>
             <div className={handles.sizePicker}>
-                {flattenSizes.map((item: any, index: any) =>
-                    <span
-                        key={index}
-                        className={`${state.selectedSize.size == item.size ? handles['size--selected'] : ''} ${applyModifiers(handles.size, item.size.toLowerCase())}`}
-                        onClick={() => handleSizeChange(item)}
-                    >
-                        {item.size}
-                    </span>
-                )}
+                <Swiper
+                    slidesPerView={15}
+                    breakpoints={{
+                        768: {
+                            spaceBetween: 10,
+                            navigation: false,
+                            slidesPerView: 6
+                        }
+                    }}
+                    className='size-picker-swiper'
+                    centeredSlides={false}
+                    navigation
+                    scrollbar={{ draggable: true }}
+                >
+                    {flattenSizes.map((item: any, index: any) =>
+                        <SwiperSlide
+                            key={index}
+                            className={`${state.selectedSize.size == item.size ? handles['size--selected'] : ''} ${applyModifiers(handles.size, item.size.toLowerCase())}`}
+                            onClick={() => handleSizeChange(item)}
+                        >
+                            {item.size}
+                        </SwiperSlide>
+                    )}
+                </Swiper>
+
             </div>
         </>
     )
