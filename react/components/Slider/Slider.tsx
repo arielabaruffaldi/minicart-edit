@@ -18,18 +18,12 @@ const Slider: any = ({ children, spaceBetween = 0, className }: PropsWithChildre
         <Swiper
             spaceBetween={spaceBetween}
             className={`${handles['Slider--container']} ${className || ''}`}
-            slidesPerView={2}
-            breakpoints={{
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: spaceBetween,
-                    navigation: false
-                }
-            }}
+            slidesPerView={"auto"}
             scrollbar={{ draggable: true }}
-
         >
-            {children.map((item: any, index: number) => <SwiperSlide className={handles['Slider--item']} key={index}>{item}</SwiperSlide>)}
+            {children.map((item: any, index: number) =>
+                <SwiperSlide className={handles['Slider--item']} key={index}>{item}</SwiperSlide>
+            )}
         </Swiper>
     )
 }
