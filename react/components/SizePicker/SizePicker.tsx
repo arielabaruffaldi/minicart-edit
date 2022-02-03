@@ -39,7 +39,7 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
     }, [activeIndex, flattenSizes])
 
 
-  
+
 
     const handleSizeChange = (item: any) => {
         dispatch({ type: "SET_SELECTED_SIZE", payload: item })
@@ -64,7 +64,6 @@ const SizePicker: React.FunctionComponent<SizePickerProps> = ({ availableSkusPer
                     onSlideChange={(slide) => {
                         setActveIndex(slide.activeIndex)
                     }}
-                    scrollbar={{ draggable: true }}
                 >
                     {flattenSizes.map((item: any, index: any) =>
                         <SwiperSlide
